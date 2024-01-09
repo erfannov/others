@@ -1,0 +1,23 @@
+from geopy.geocoders import Nominatim
+
+def get_postal_code(lat, lon):
+    geolocator = Nominatim(user_agent="get_postal_code_example")
+    location = geolocator.reverse((lat, lon), language='en')
+    
+    if location:
+        address = location.raw.get('address', {})
+        postal_code = address.get('postcode')
+        
+        if postal_code:
+            return f"Kode Pos =  {postal_code}"
+        else:
+            return "Not a valid area"
+    else:
+        return "No information about the location."
+
+# Example coordinates (replace with your own)
+latitude = 2.994999
+longitude = 99.0372877
+
+result = get_postal_code(latitude, longitude)
+print(result)
